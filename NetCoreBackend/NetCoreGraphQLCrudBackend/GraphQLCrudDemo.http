@@ -1,0 +1,6 @@
+@NetCoreGraphQLCrudBackend_HostAddress = http://localhost:5152
+
+GET {{NetCoreGraphQLCrudBackend_HostAddress}}/graphql/
+Accept: application/json
+
+###
