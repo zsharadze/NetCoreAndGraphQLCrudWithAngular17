@@ -17,7 +17,7 @@ This is CRUD example with ASP.Net Core 8 GraphQL and Angular 17.
 3. Run the NetCoreGraphQLCrudBackend project.
 4. Go to angular-app and open it with Visual Studio Code.
 5. Open terminal and run npm install command to install node modules.
-5. Run Angular project with ng serve -o and you are done.
+5. Run Angular project with npm start and you are done.
 
 ![screenshot](https://github.com/zsharadze/NetCoreAndGraphQLCrudWithAngular17/blob/master/Capture1.png?raw=true)
 
