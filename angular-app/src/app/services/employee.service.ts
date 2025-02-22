@@ -16,13 +16,13 @@ export class EmployeeService {
   constructor(private apollo: Apollo) {}
 
   getEmployees(searchText: string) {
-    return this.apollo.watchQuery({
+    return this.apollo.query({
       query: GET_EMPLOYEES,
       variables: {
         searchText: searchText
       },
       fetchPolicy: 'no-cache',
-    }).valueChanges;
+    })
   }
 
   getEmployee(id: number) {

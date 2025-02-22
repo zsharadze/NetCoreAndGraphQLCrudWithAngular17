@@ -30,11 +30,11 @@ export class AddEmployeeComponent {
 
   constructor(
     private employeeService: EmployeeService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    let id = this.route.snapshot.queryParamMap.get('id');
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       //getemployee by id for edit
       this.employeeId = Number(id);
