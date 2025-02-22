@@ -1,8 +1,8 @@
 import { gql } from 'apollo-angular';
 
 const GET_EMPLOYEES = gql`
-  query {
-    employees {
+  query employees($searchText: String){
+    employees(searchText: $searchText) {
       id
       email
       fullName

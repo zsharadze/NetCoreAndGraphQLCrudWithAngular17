@@ -11,15 +11,16 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class EmployeeService {
   constructor(private apollo: Apollo) {}
 
-  getEmployees() {
+  getEmployees(searchText: string) {
     return this.apollo.watchQuery({
       query: GET_EMPLOYEES,
+      variables: {
+        searchText: searchText
+      },
       fetchPolicy: 'no-cache',
     }).valueChanges;
   }

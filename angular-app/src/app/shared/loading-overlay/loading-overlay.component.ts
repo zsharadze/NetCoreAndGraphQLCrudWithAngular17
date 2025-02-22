@@ -10,5 +10,5 @@ import { LoaderService } from '../../services/loader.service';
   styleUrl: './loading-overlay.component.css',
 })
 export class LoadingOverlayComponent {
-  constructor(public loader: LoaderService) {}
+  constructor(public loaderService: LoaderService) {}
 }

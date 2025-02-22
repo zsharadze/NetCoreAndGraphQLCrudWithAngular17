@@ -11,6 +11,7 @@ import { RouterModule, Router } from '@angular/router';
   selector: 'app-employees',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
+  providers: [EmployeeService],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css',
 })
@@ -28,7 +29,7 @@ export class EmployeesComponent {
   ngOnInit() {
     this.getEmployess();
     this.fullNameModelChangeSubscription = this.fullNameModelChanged
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((text) => {
         this.searchText = text;
         this.getEmployess();
@@ -36,12 +37,8 @@ export class EmployeesComponent {
   }
 
   getEmployess() {
-    this.employeeService.getEmployees().subscribe(({ data, error }: any) => {
+    this.employeeService.getEmployees(this.searchText).subscribe(({ data, error }: any) => {
       this.employees = data.employees;
-      if (this.searchText)
-        this.employees = data.employees.filter((e: EmployeeModel) =>
-          e.fullName.toLowerCase().includes(this.searchText.toLowerCase())
-        );
     });
   }
 

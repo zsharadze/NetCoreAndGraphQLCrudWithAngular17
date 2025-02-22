@@ -13,13 +13,7 @@ namespace NetCoreGraphQLCrudBackend.GraphQL
 
         public async Task<Employee> UpdateEmployee(Employee input, [Service] EmployeeRepository repository)
         {
-            var employeeToUpdate = await repository.GetEmployeeAsync(input.Id);
-            employeeToUpdate.Id = input.Id;
-            employeeToUpdate.Age = input.Age;
-            employeeToUpdate.Email = input.Email;
-            employeeToUpdate.FullName = input.FullName;
-            var updatedEmployee = await repository.UpdateEmployeeAsync(employeeToUpdate);
-
+            var updatedEmployee = await repository.UpdateEmployeeAsync(input);
             return updatedEmployee;
         }
 

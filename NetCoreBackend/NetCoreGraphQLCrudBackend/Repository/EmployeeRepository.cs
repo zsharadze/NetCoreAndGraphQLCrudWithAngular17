@@ -23,7 +23,7 @@ namespace NetCoreGraphQLCrudBackend.Repository
         public async Task<Employee> GetEmployeeAsync(int id)
         {
             var employee = await _context.Employees.FindAsync(id);
-            
+
             if (employee == null)
             {
                 throw new Exception($"Employee with id {id} not found.");
@@ -32,24 +32,26 @@ namespace NetCoreGraphQLCrudBackend.Repository
             return employee;
         }
 
-        public async Task<List<Employee>> GetAllEmployeeAsync()
+        public async Task<List<Employee>> GetAllEmployeeAsync(string searchText)
         {
-            return await _context.Employees.ToListAsync();
+            if (string.IsNullOrEmpty(searchText))
+            {
+                return await _context.Employees.ToListAsync();
+            }
+            else
+            {
+                return await _context.Employees.Where(x => x.FullName.StartsWith(searchText)).ToListAsync();
+            }
         }
 
         public async Task<Employee> UpdateEmployeeAsync(Employee updatedEmployee)
         {
-            var existingEmployee = await _context.Employees.FindAsync(updatedEmployee.Id);
-            if (existingEmployee != null)
-            {
-                existingEmployee.Age = updatedEmployee.Age;
-                existingEmployee.Email = updatedEmployee.Email;
-                existingEmployee.FullName = updatedEmployee.FullName;
-                await _context.SaveChangesAsync();
-                return existingEmployee;
-            }
-            else
-                throw new Exception($"Employee with id {updatedEmployee.Id} not found.");
+            var existingEmployee = await GetEmployeeAsync(updatedEmployee.Id);
+            existingEmployee.Age = updatedEmployee.Age;
+            existingEmployee.Email = updatedEmployee.Email;
+            existingEmployee.FullName = updatedEmployee.FullName;
+            await _context.SaveChangesAsync();
+            return existingEmployee;
         }
 
         public async Task<bool> DeleteEmployeeAsync(int id)
